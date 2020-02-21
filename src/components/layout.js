@@ -37,11 +37,12 @@ const Layout = ({ children }) => {
           <a href="https://www.gatsbyjs.org">Gatsby</a>
           <br />
           <p>
-            Icon made by{" "}
+            Icon made by{` `}
             <a href="https://www.flaticon.com/authors/freepik" title="Freepik">
               Freepik
-            </a>{" "}
-            from{" "}
+            </a>
+            {` `}
+            from{` `}
             <a href="https://www.flaticon.com/" title="Flaticon">
               www.flaticon.com
             </a>
