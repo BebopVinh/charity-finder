@@ -1,5 +1,21 @@
 @tailwind base;
 @tailwind components;
-@tailwind utilities;
 
 /* @import "./nav"; */
+.gradient {
+  background: linear-gradient(90deg, #d53369 0%, #daae51 100%);
+}
+
+nav#header {
+  @apply fixed w-full z-30 top-0 text-white;
+}
+
+.nav-container {
+  @apply w-full mx-auto flex flex-wrap items-center justify-between mt-0 py-2;
+}
+
+a.nav-link {
+  @apply text-white no-underline font-bold text-2xl;
+}
+
+@tailwind utilities;
