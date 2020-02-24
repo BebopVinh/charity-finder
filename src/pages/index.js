@@ -12,9 +12,8 @@ const IndexPage = () => (
       <h1>Hi people</h1>
       <Link to="/page-2/">Go to page 2</Link>
       <br />
-      <Link to="/page-3/">Go to page 3</Link>
       <Splash />
-      {/* <button className="btn btn-blue">Blue Button</button> */}
+      <button className="btn btn-blue">Blue Button</button>
     </div>
   </Layout>
 )
