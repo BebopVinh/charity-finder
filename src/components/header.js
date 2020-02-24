@@ -29,15 +29,17 @@ const Header = ({ siteTitle }) => (
   //     </h1>
   //   </div>
   // </header>
-  <nav id="header" className=".bg-green-300 mb-3">
-    <div className="nav-container container">
-      <div className="pl-4 flex items-center">
-        <a href="#" className="nav-link toggleColour">
-          {siteTitle ? siteTitle : "My Header"}
-        </a>
+  <header>
+    <nav id="header">
+      <div className="nav-container container">
+        <div className="link-container">
+          <a href="#" className="nav-link toggleColour">
+            {siteTitle}
+          </a>
+        </div>
       </div>
-    </div>
-  </nav>
+    </nav>
+  </header>
 )
 
 Header.propTypes = {
