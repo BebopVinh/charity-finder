@@ -1,21 +1,40 @@
 @tailwind base;
 @tailwind components;
 
-/* @import "./nav"; */
 .gradient {
   background: linear-gradient(90deg, #d53369 0%, #daae51 100%);
 }
 
+header {
+  @apply px-8 py-12;
+}
+
 nav#header {
-  @apply fixed w-full z-30 top-0 text-white;
+  @apply fixed w-full mb-6 pb-6 z-30 top-0;
 }
 
 .nav-container {
   @apply w-full mx-auto flex flex-wrap items-center justify-between mt-0 py-2;
 }
 
-a.nav-link {
-  @apply text-white no-underline font-bold text-2xl;
+.nav-link {
+  @apply no-underline font-bold text-2xl;
+}
+
+.link-container {
+  @apply pl-4 flex items-center;
+}
+
+.btn {
+  @apply font-bold py-2 px-4 rounded;
+}
+
+.btn-blue {
+  @apply bg-blue-500 text-white;
+}
+
+.btn-blue:hover {
+  @apply bg-blue-700;
 }
 
 @tailwind utilities;
