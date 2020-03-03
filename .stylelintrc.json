@@ -1,4 +1,4 @@
-module.exports = {
+{
   "extends": ["stylelint-config-standard"],
 
   "rules": {
@@ -17,4 +17,4 @@ module.exports = {
     "declaration-block-trailing-semicolon": null,
     "no-descending-specificity": null
   }
-})
+}
