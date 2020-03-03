@@ -1,21 +1,33 @@
 import React from "react"
 import { Link } from "gatsby"
+import { connect } from "react-redux"
 
 import Layout from "../components/layout"
-import Splash from "../components/splash/splash"
 import SEO from "../components/seo"
 
-const IndexPage = () => (
+import { toggleDarkMode } from "../state/app"
+
+const IndexPage = ({ isDarkMode, dispatch }) => (
   <Layout>
     <div className="my-4">
       <SEO title="Home" />
       <h1>Hi people</h1>
       <Link to="/page-2/">Go to page 2</Link>
       <br />
-      <Splash />
-      <button className="btn btn-blue">Blue Button</button>
+      <button
+        style={
+          isDarkMode
+            ? { background: "black", color: "white" }
+            : { background: "white", color: "black" }
+        }
+        onClick={() => dispatch(toggleDarkMode(!isDarkMode))}
+      >
+        Dark mode {isDarkMode ? "on" : "off"}
+      </button>
     </div>
   </Layout>
 )
 
-export default IndexPage
+const mapStateToProps = state => ({ isDarkMode: state.app.isDarkMode })
+
+export default connect(mapStateToProps, null)(IndexPage)
