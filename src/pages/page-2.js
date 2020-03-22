@@ -7,41 +7,54 @@ import { getOrganizations } from "../state/app"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
-const SecondPage = (props, { dispatch }) => {
-  const { organizations } = props
+const SecondPage = ({ dispatch }) => {
   const [results, setResults] = useState("")
-  const apiKey = `?api_key=${process.env.GATSBY_API_KEY}`
-  const url = "/public/orgservice/all/organizations.json"
+  const [isLoading, setIsLoading] = useState(true)
 
   async function fetchOrganizations() {
+    console.log("Hitting the server!")
     const response = await fetch("http://localhost:3000/organizations")
     const data = await response.json()
     await setResults(data)
-    await console.log(results)
+    await setIsLoading(false)
+  }
+
+  const renderOrganizations = () => {
+    console.log(`pings: `, results)
+    const {
+      organizations: { organization },
+    } = results
+    return organization.map(org => (
+      <div key={org.id}>
+        <p>Name: {org.name}</p>
+        <p>Mission: {org.mission}</p>
+        <p>
+          Themes:
+          <ul>
+            {org.themes.theme.map(theme => (
+              <li>{theme.name}</li>
+            ))}
+          </ul>
+        </p>
+        <a href={org.url}>{org.url}</a>
+        <br />
+      </div>
+    ))
   }
 
   useEffect(() => {
-    // if (organizations.length === 0) {
-    // return fetch("/api" + url + apiKey, {
-    //   method: "GET",
-    //   mode: "cors",
-    //   headers: {
-    //     "Content-type": "application/json",
-    //   },
-    // })
-    //   .then(response => console.log(response))
-    //   .then(data => (results = data))
-    // }
-    debugger
-    fetchOrganizations()
+    isLoading ? fetchOrganizations() : setIsLoading(false)
   })
 
   return (
     <Layout>
       <SEO title="Page two" />
       <Link to="/">Go back to the homepage</Link>
-
-      <div></div>
+      <br />
+      <div className="organizations-list">
+        {console.log(isLoading)}
+        {isLoading ? "Nothing to see here..." : renderOrganizations()}
+      </div>
     </Layout>
   )
 }
