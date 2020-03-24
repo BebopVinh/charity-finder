@@ -8,22 +8,18 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 
 const SecondPage = ({ dispatch }) => {
-  const [results, setResults] = useState("")
-  const [isLoading, setIsLoading] = useState(true)
+  const [results, setResults] = useState({ data: "", isLoading: true })
 
   async function fetchOrganizations() {
-    console.log("Hitting the server!")
     const response = await fetch("http://localhost:3000/organizations")
     const data = await response.json()
-    await setResults(data)
-    await setIsLoading(false)
+    await setResults({ ...data, isLoading: false })
+    await console.log("Server hit!")
   }
 
   const renderOrganizations = () => {
     console.log(`pings: `, results)
-    const {
-      organizations: { organization },
-    } = results
+    const organization = results.data.organizations.organization
     return organization.map(org => (
       <div key={org.id}>
         <p>Name: {org.name}</p>
@@ -43,7 +39,9 @@ const SecondPage = ({ dispatch }) => {
   }
 
   useEffect(() => {
-    isLoading ? fetchOrganizations() : setIsLoading(false)
+    results.isLoading
+      ? fetchOrganizations()
+      : setResults(prev => console.log("Previous: ", prev))
   })
 
   return (
@@ -52,8 +50,8 @@ const SecondPage = ({ dispatch }) => {
       <Link to="/">Go back to the homepage</Link>
       <br />
       <div className="organizations-list">
-        {console.log(isLoading)}
-        {isLoading ? "Nothing to see here..." : renderOrganizations()}
+        {console.log(results)}
+        {results.isLoading ? "Nothing to see here..." : renderOrganizations()}
       </div>
     </Layout>
   )
