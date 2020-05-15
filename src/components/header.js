@@ -2,7 +2,7 @@ import React from "react"
 import PropTypes from "prop-types"
 
 const Header = ({ siteTitle }) => (
-  <header>
+  <header className="bg-green-300">
     <nav id="header">
       <div className="nav-container container">
         <div className="link-container">
