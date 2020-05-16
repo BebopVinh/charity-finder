@@ -4,6 +4,7 @@ import { connect } from "react-redux"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import OrganizationList from "../components/organization/organizationlist"
+import LoadingCircle from "../components/animation/loadingcircle"
 
 const SecondPage = props => {
   const { organizations } = props
@@ -13,6 +14,7 @@ const SecondPage = props => {
     const response = await fetch("http://localhost:3000/organizations")
     const data = await response.json()
     await setResults(data)
+    await console.log(results)
   }
 
   useEffect(() => {
@@ -23,11 +25,19 @@ const SecondPage = props => {
     if (results === "") fetchOrganizations()
   }, [])
 
+  const renderResults = () => {
+    return results !== "" ? (
+      <OrganizationList {...results} />
+    ) : (
+      <LoadingCircle />
+    )
+  }
+
   return (
     <Layout>
       <SEO title="Page two" />
       <Link to="/">Go back to the homepage</Link>
-      {results === "" ? null : <OrganizationList {...results} />}
+      {renderResults()}
     </Layout>
   )
 }
